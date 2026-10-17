@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { GitHubStars } from "@/components/GitHubStars";
-import { BRAND_NAME, GITHUB_REPO_URL, HERO_SCREENSHOT_PATH } from "@/constants/site";
+import { SiteHeader } from "@/components/SiteHeader";
+import {
+  BRAND_NAME,
+  GITHUB_CONTRIBUTE_URL,
+  GITHUB_GET_STARTED_URL,
+  GITHUB_LICENSE_URL,
+  GITHUB_REPO_URL,
+  GITHUB_SECURITY_URL,
+  HERO_SCREENSHOT_PATH,
+} from "@/constants/site";
 import { getGitHubStarCount } from "@/lib/githubRepo";
-import ThemeToggle from "./theme-toggle";
 
 const workflows = [
   {
@@ -36,35 +44,20 @@ export default async function Home() {
 
   return (
     <main>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label={`${BRAND_NAME} home`}><span>{BRAND_NAME}</span></a>
-        <nav className="main-nav" aria-label="Main navigation">
-          <a href="#features">What it does</a>
-          <a href="#workflow">The workflow</a>
-          <a href="#faq">FAQ</a>
-          <a className="nav-github-link" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-            GitHub <GitHubStars count={githubStars} variant="pill" />
-          </a>
-        </nav>
-        <div className="header-actions">
-          <ThemeToggle />
-          <a className="header-cta" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-            Contribute to this repo
-            <span className="header-cta-arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </header>
+      <SiteHeader githubStars={githubStars} />
 
       <section className="hero-section" id="top">
         <div className="hero-copy">
           <h1>Move fast.<br /><span>Stay grounded.</span></h1>
-          <p className="hero-description">AI makes it easy to write code. {BRAND_NAME} helps you make sure it’s the right code, with a clear plan, testable constraints, and a system built to hold up.</p>
+          <p className="hero-description">
+            AI makes it easy to write code. {BRAND_NAME} helps you plan the system, scan a local repo, and export handoff files for your coding agent. Projects stay on your device; nothing is uploaded to us.
+          </p>
           <div className="hero-actions">
-            <a className="button-primary" href="#workflow">See how it works <span>→</span></a>
-            <a className="text-link github-text-link" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-              Star the repo
-              <GitHubStars count={githubStars} variant="pill" />
-              <span>↗</span>
+            <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
+              Get started <span>↗</span>
+            </a>
+            <a className="text-link" href="#workflow">
+              See how it works <span>→</span>
             </a>
           </div>
           <div className="hero-proof"><div className="proof-avatars" aria-hidden="true"><span>⌘</span><span>◈</span><span>✓</span></div><span>For people building real software with AI</span></div>
@@ -116,7 +109,9 @@ export default async function Home() {
         <div className="section-wrap">
           <div className="section-heading feature-heading">
             <div><span className="section-eyebrow">A desktop studio for better builds</span><h2>A working plan for the<br className="desktop-break" /> software you’re about to build.</h2></div>
-            <p>{BRAND_NAME} turns the thinking around a project into something visible, structured, and ready to use in your everyday tools.</p>
+            <p>
+              {BRAND_NAME} turns product intent into maps, constraints, and handoff files you can drop into Cursor, VS Code, Claude Code, and similar tools. Use your own AI keys when you want help; the app does not proxy them.
+            </p>
           </div>
 
           <div className="feature-grid">
@@ -134,7 +129,7 @@ export default async function Home() {
             </article>
 
             <article className="feature-card feature-code-card">
-              <div className="feature-card-copy"><span className="feature-kicker">02 / UNDERSTAND WHAT EXISTS</span><h3>Bring an idea or a codebase.</h3><p>Start a new project from scratch or scan an existing repository to find your way around.</p></div>
+              <div className="feature-card-copy"><span className="feature-kicker">02 / UNDERSTAND WHAT EXISTS</span><h3>Bring an idea or a codebase.</h3><p>Start greenfield or pick a local folder to scan. Deeper checks apply when the repo matches a supported stack profile (Next.js today).</p></div>
               <div className="file-preview" aria-hidden="true">
                 <div className="file-preview-top"><span className="file-window-dots"><i /><i /><i /></span><span>inventory-app</span><span className="scan-badge"><i /> Scan complete</span></div>
                 <div className="file-row file-folder"><span>⌄</span><b>src</b><small>folder</small></div>
@@ -146,7 +141,7 @@ export default async function Home() {
             </article>
 
             <article className="feature-card feature-handoff-card">
-              <div className="feature-card-copy"><span className="feature-kicker">03 / HAND OFF WITH CONTEXT</span><h3>Give your coding agent a better starting point.</h3><p>Generate a project blueprint and IDE-specific instructions. Review the files, then add them to your project.</p></div>
+              <div className="feature-card-copy"><span className="feature-kicker">03 / HAND OFF WITH CONTEXT</span><h3>Give your coding agent a better starting point.</h3><p>Preview AGENTS.md, blueprint docs, and IDE hints. Download a zip or write into a project folder from the desktop app.</p></div>
               <div className="handoff-preview" aria-hidden="true">
                 <div className="handoff-file"><span className="handoff-file-icon">MD</span><span><b>AGENTS.md</b><small>Agent entry point</small></span><span className="handoff-status">Ready</span></div>
                 <div className="handoff-file"><span className="handoff-file-icon blue-file">⌘</span><span><b>blueprint/architecture.md</b><small>System design & decisions</small></span><span className="handoff-status">Ready</span></div>
@@ -186,6 +181,9 @@ export default async function Home() {
             <details className="faq-item"><summary>Can I use it with an existing project?<span>+</span></summary><p>Yes. {BRAND_NAME} can scan a local codebase and give you an overview of its structure, architecture signals, and useful next steps. Deeper analysis applies when the repo matches a supported stack profile (Next.js today).</p></details>
             <details className="faq-item"><summary>Which coding tools can I hand off to?<span>+</span></summary><p>{BRAND_NAME} can prepare files for Cursor, VS Code, Codex, Claude Code, JetBrains IDEs, and other tools that use Markdown instructions.</p></details>
             <details className="faq-item"><summary>What happens when I export a handoff?<span>+</span></summary><p>You can review the generated files first. {BRAND_NAME} shows which files will be added and warns before replacing any matching files already in the project.</p></details>
+            <details className="faq-item"><summary>Is my data sent to your servers?<span>+</span></summary><p>No. Specs and scan results stay on your machine. Export JSON from the project menu to back up. If you turn on AI, requests go directly to the provider you configure.</p></details>
+            <details className="faq-item"><summary>Do I need AI to use it?<span>+</span></summary><p>Much of greenfield works without AI. Build questions need a configured provider. Scans and handoff preview do not require AI.</p></details>
+            <details className="faq-item"><summary>Browser or desktop app?<span>+</span></summary><p>Both exist. The browser build is fine for planning. Use the Tauri desktop app for reliable folder pickers, exports into a repo, and day-to-day brownfield work.</p></details>
           </div>
         </div>
       </section>
@@ -194,13 +192,15 @@ export default async function Home() {
         <p className="section-eyebrow">Open source (MIT)</p>
         <h2>Better software starts<br />with better questions.</h2>
         <div className="hero-actions closing-actions">
-          <a className="button-primary github-primary-cta" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-            Contribute to this repo
+          <a className="button-primary github-primary-cta" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
+            Get started
             <span aria-hidden="true">↗</span>
           </a>
-          <a className="text-link" href="#workflow">See how it works <span>→</span></a>
+          <a className="text-link" href={GITHUB_CONTRIBUTE_URL} target="_blank" rel="noreferrer">
+            Contribute on GitHub <span>↗</span>
+          </a>
         </div>
-        <p className="closing-run-hint">Install steps are in the repo README.</p>
+        <p className="closing-run-hint">Clone the repo and follow the README to run in the browser or desktop app.</p>
       </section>
 
       <footer className="site-footer">
@@ -210,6 +210,14 @@ export default async function Home() {
           © 2026 {BRAND_NAME} ·{" "}
           <a className="footer-github-link" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
             GitHub <GitHubStars count={githubStars} variant="pill" />
+          </a>{" "}
+          ·{" "}
+          <a href={GITHUB_LICENSE_URL} target="_blank" rel="noreferrer">
+            License
+          </a>{" "}
+          ·{" "}
+          <a href={GITHUB_SECURITY_URL} target="_blank" rel="noreferrer">
+            Security
           </a>{" "}
           · MIT
         </span>

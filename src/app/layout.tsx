@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { BRAND_NAME } from "@/constants/site";
+import { ThemeInitScript } from "./theme-init";
+import { BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -10,17 +11,34 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteDescription =
+  "Plan architecture, scan local codebases, and export agent handoffs. Local-first, MIT open source.";
+
 export const metadata: Metadata = {
   title: `${BRAND_NAME} · Build on solid ground`,
-  description:
-    "Plan your architecture, define testable constraints, and build dependable software with AI using blueprint studio.",
+  description: siteDescription,
   openGraph: {
+    type: "website",
     title: `${BRAND_NAME} · Build on solid ground`,
-    description:
-      "Plan your architecture, define testable constraints, and build dependable software with AI using blueprint studio.",
-    url: "https://blueprint-web-chi.vercel.app/",
+    description: siteDescription,
+    url: SITE_URL,
+    siteName: BRAND_NAME,
+    images: [
+      {
+        url: HERO_SCREENSHOT_PATH,
+        width: 3024,
+        height: 1964,
+        alt: `${BRAND_NAME} app screenshot`,
+      },
+    ],
   },
-  metadataBase: new URL("https://blueprint-web-chi.vercel.app/"),
+  twitter: {
+    card: "summary_large_image",
+    title: `${BRAND_NAME} · Build on solid ground`,
+    description: siteDescription,
+    images: [HERO_SCREENSHOT_PATH],
+  },
+  metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
 };
 
@@ -30,11 +48,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${poppins.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${poppins.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
+        <ThemeInitScript />
+        <a className="skip-link" href="#top">
+          Skip to content
+        </a>
         {children}
         <Analytics />
       </body>
