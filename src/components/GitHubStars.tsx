@@ -7,9 +7,10 @@ type GitHubStarsProps = {
 };
 
 export function GitHubStars({ count, variant = "inline", className = "" }: GitHubStarsProps) {
-  if (count == null || count <= 0) return null;
+  if (count == null || count < 0) return null;
 
-  const label = `${formatStarCount(count)} GitHub stars`;
+  const label =
+    count === 0 ? "No GitHub stars yet — star the repo to show support" : `${formatStarCount(count)} GitHub stars`;
 
   return (
     <span
