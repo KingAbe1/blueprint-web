@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, type MouseEvent } from "react";
 import { GitHubStars } from "@/components/GitHubStars";
 import {
   BRAND_NAME,
@@ -17,6 +17,7 @@ type SiteHeaderProps = {
 const NAV_LINKS = [
   { href: "#features", label: "What it does" },
   { href: "#workflow", label: "The workflow" },
+  { href: "#download", label: "Download" },
   { href: "#faq", label: "FAQ" },
 ] as const;
 
@@ -35,9 +36,16 @@ export function SiteHeader({ githubStars }: SiteHeaderProps) {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const goHome = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    closeMenu();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(null, "", "/");
+  };
+
   return (
     <header className="site-header">
-      <a className="wordmark" href="#top" aria-label={`${BRAND_NAME} home`} onClick={closeMenu}>
+      <a className="wordmark" href="/" aria-label={`${BRAND_NAME} home`} onClick={goHome}>
         <span>{BRAND_NAME}</span>
       </a>
 

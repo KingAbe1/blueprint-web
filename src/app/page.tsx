@@ -1,16 +1,16 @@
 import Image from "next/image";
-import { GitHubStars } from "@/components/GitHubStars";
+import { Suspense } from "react";
+import { DownloadSection, DownloadSectionFallback } from "@/components/DownloadSection";
+import { FooterMeta, FooterMetaFallback } from "@/components/FooterMeta";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteHeaderWithStars } from "@/components/SiteHeaderWithStars";
 import {
   BRAND_NAME,
   GITHUB_CONTRIBUTE_URL,
   GITHUB_GET_STARTED_URL,
-  GITHUB_LICENSE_URL,
   GITHUB_REPO_URL,
-  GITHUB_SECURITY_URL,
   HERO_SCREENSHOT_PATH,
 } from "@/constants/site";
-import { getGitHubStarCount } from "@/lib/githubRepo";
 
 const workflows = [
   {
@@ -39,14 +39,14 @@ const workflows = [
   },
 ];
 
-export default async function Home() {
-  const githubStars = await getGitHubStarCount();
-
+export default function Home() {
   return (
-    <main>
-      <SiteHeader githubStars={githubStars} />
+    <main id="main-content">
+      <Suspense fallback={<SiteHeader githubStars={null} />}>
+        <SiteHeaderWithStars />
+      </Suspense>
 
-      <section className="hero-section" id="top">
+      <section className="hero-section">
         <div className="hero-copy">
           <h1>Move fast.<br /><span>Stay grounded.</span></h1>
           <p className="hero-description">
@@ -188,6 +188,10 @@ export default async function Home() {
         </div>
       </section>
 
+      <Suspense fallback={<DownloadSectionFallback />}>
+        <DownloadSection />
+      </Suspense>
+
       <section className="closing-section section-wrap" id="get-started">
         <p className="section-eyebrow">Open source (MIT)</p>
         <h2>Better software starts<br />with better questions.</h2>
@@ -204,23 +208,11 @@ export default async function Home() {
       </section>
 
       <footer className="site-footer">
-        <a className="wordmark footer-wordmark" href="#top"><span>{BRAND_NAME}</span></a>
+        <a className="wordmark footer-wordmark" href="/"><span>{BRAND_NAME}</span></a>
         <span>Architectural rigor for the generative era.</span>
-        <span className="footer-meta">
-          © 2026 {BRAND_NAME} ·{" "}
-          <a className="footer-github-link" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-            GitHub <GitHubStars count={githubStars} variant="pill" />
-          </a>{" "}
-          ·{" "}
-          <a href={GITHUB_LICENSE_URL} target="_blank" rel="noreferrer">
-            License
-          </a>{" "}
-          ·{" "}
-          <a href={GITHUB_SECURITY_URL} target="_blank" rel="noreferrer">
-            Security
-          </a>{" "}
-          · MIT
-        </span>
+        <Suspense fallback={<FooterMetaFallback />}>
+          <FooterMeta />
+        </Suspense>
       </footer>
     </main>
   );
