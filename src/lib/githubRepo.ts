@@ -1,12 +1,20 @@
 const GITHUB_REPO_API = "https://api.github.com/repos/KingAbe1/blueprint";
 
+function githubApiHeaders(): HeadersInit {
+  const headers: Record<string, string> = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "blueprint-web",
+    "X-GitHub-Api-Version": "2022-11-28",
+  };
+  const token = process.env.GITHUB_TOKEN?.trim();
+  if (token) headers.Authorization = `Bearer ${token}`;
+  return headers;
+}
+
 export async function getGitHubStarCount(): Promise<number | null> {
   try {
     const res = await fetch(GITHUB_REPO_API, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "blueprint-web",
-      },
+      headers: githubApiHeaders(),
       next: { revalidate: 600 },
     });
     if (!res.ok) return null;
@@ -28,10 +36,7 @@ export type GitHubReleaseSummary = {
 export async function getLatestRelease(): Promise<GitHubReleaseSummary | null> {
   try {
     const res = await fetch(`${GITHUB_REPO_API}/releases/latest`, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "blueprint-web",
-      },
+      headers: githubApiHeaders(),
       next: { revalidate: 600 },
     });
     if (!res.ok) return null;
