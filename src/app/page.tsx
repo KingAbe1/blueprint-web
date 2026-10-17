@@ -124,11 +124,10 @@ export default function Home() {
             <details className="faq-item"><summary>Browser or desktop app?<span>+</span></summary><p>Both. The browser build is fine for planning. Use the desktop app for folder pickers and writing handoffs into a repo.</p></details>
           </div>
         </div>
+        <Suspense fallback={<DownloadSectionFallback />}>
+          <DownloadSection />
+        </Suspense>
       </section>
-
-      <Suspense fallback={<DownloadSectionFallback />}>
-        <DownloadSection />
-      </Suspense>
 
       <section className="closing-section section-wrap" id="get-started">
         <p className="section-eyebrow">Open source (MIT)</p>
@@ -142,7 +141,7 @@ export default function Home() {
             Contribute on GitHub <span>↗</span>
           </a>
         </div>
-        <p className="closing-run-hint">Clone the repo and follow the README to run in the browser or desktop app.</p>
+        <p className="closing-run-hint">MIT licensed. Star the repo or open an issue if you get stuck.</p>
       </section>
 
       <footer className="site-footer">

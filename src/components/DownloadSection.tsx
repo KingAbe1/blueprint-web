@@ -16,13 +16,10 @@ export async function DownloadSection() {
   const latestRelease = await getLatestRelease();
 
   return (
-    <section className="download-band" id="download" aria-labelledby="download-heading">
-      <div className="download-section section-wrap">
-      <div className="section-heading download-heading">
-        <div>
-          <span className="section-eyebrow">Run it locally</span>
-          <h2 id="download-heading">Run in the browser or desktop app.</h2>
-        </div>
+    <div className="download-block section-wrap" id="download" aria-labelledby="download-heading">
+      <div className="download-intro">
+        <span className="section-eyebrow">Run it locally</span>
+        <h2 id="download-heading">Install and run</h2>
         <p>
           Clone the repo and follow the README. Use <code>npm run dev</code> for the web build or{" "}
           <code>npm run tauri:dev</code> for the desktop app.
@@ -48,20 +45,16 @@ export async function DownloadSection() {
           </a>
         ) : null}
       </div>
-      </div>
-    </section>
+    </div>
   );
 }
 
 export function DownloadSectionFallback() {
   return (
-    <section className="download-band" id="download" aria-labelledby="download-heading" aria-busy="true">
-      <div className="download-section section-wrap">
-      <div className="section-heading download-heading">
-        <div>
-          <span className="section-eyebrow">Run it locally</span>
-          <h2 id="download-heading">Run in the browser or desktop app.</h2>
-        </div>
+    <div className="download-block section-wrap" id="download" aria-labelledby="download-heading" aria-busy="true">
+      <div className="download-intro">
+        <span className="section-eyebrow">Run it locally</span>
+        <h2 id="download-heading">Install and run</h2>
         <p>
           Clone the repo and follow the README. Use <code>npm run dev</code> for the web build or{" "}
           <code>npm run tauri:dev</code> for the desktop app.
@@ -75,7 +68,6 @@ export function DownloadSectionFallback() {
           GitHub Releases <span>↗</span>
         </a>
       </div>
-      </div>
-    </section>
+    </div>
   );
 }
