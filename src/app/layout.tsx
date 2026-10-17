@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { BRAND_NAME } from "@/constants/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -10,9 +11,17 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Blueprint — Build on solid ground",
+  title: `${BRAND_NAME} · Build on solid ground`,
   description:
-    "Plan your architecture, define testable constraints, and build dependable software with AI using Blueprint.",
+    "Plan your architecture, define testable constraints, and build dependable software with AI using blueprint studio.",
+  openGraph: {
+    title: `${BRAND_NAME} · Build on solid ground`,
+    description:
+      "Plan your architecture, define testable constraints, and build dependable software with AI using blueprint studio.",
+    url: "https://blueprint-web-chi.vercel.app/",
+  },
+  metadataBase: new URL("https://blueprint-web-chi.vercel.app/"),
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({

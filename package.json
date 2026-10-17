@@ -2,6 +2,13 @@
   "name": "blueprint-web",
   "version": "0.1.0",
   "private": true,
+  "description": "Marketing site for blueprint studio.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KingAbe1/blueprint-web.git"
+  },
+  "homepage": "https://blueprint-web-chi.vercel.app/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
