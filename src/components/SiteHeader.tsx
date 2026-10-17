@@ -16,7 +16,6 @@ type SiteHeaderProps = {
 
 const NAV_LINKS = [
   { href: "#features", label: "What it does" },
-  { href: "#workflow", label: "The workflow" },
   { href: "#download", label: "Download" },
   { href: "#faq", label: "FAQ" },
 ] as const;
