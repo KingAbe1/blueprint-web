@@ -4,7 +4,6 @@ import { useEffect, useId, useState, type MouseEvent } from "react";
 import { GitHubStars } from "@/components/GitHubStars";
 import {
   BRAND_NAME,
-  GITHUB_CONTRIBUTE_URL,
   GITHUB_GET_STARTED_URL,
   GITHUB_REPO_URL,
 } from "@/constants/site";
@@ -18,7 +17,44 @@ const NAV_LINKS = [
   { href: "#features", label: "What it does" },
   { href: "#download", label: "Download" },
   { href: "#faq", label: "FAQ" },
+  { href: GITHUB_REPO_URL, label: "GitHub", external: true, showStars: true },
 ] as const;
+
+type NavLinksProps = {
+  githubStars: number | null;
+  linkClassName?: string;
+  githubLinkClassName?: string;
+  onNavigate?: () => void;
+};
+
+function NavLinks({ githubStars, linkClassName, githubLinkClassName, onNavigate }: NavLinksProps) {
+  return (
+    <>
+      {NAV_LINKS.map((link) => {
+        if ("external" in link && link.external) {
+          return (
+            <a
+              key={link.href}
+              className={githubLinkClassName ?? linkClassName}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              onClick={onNavigate}
+            >
+              {link.label}
+              {link.showStars ? <GitHubStars count={githubStars} variant="pill" /> : null}
+            </a>
+          );
+        }
+        return (
+          <a key={link.href} className={linkClassName} href={link.href} onClick={onNavigate}>
+            {link.label}
+          </a>
+        );
+      })}
+    </>
+  );
+}
 
 export function SiteHeader({ githubStars }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -49,14 +85,7 @@ export function SiteHeader({ githubStars }: SiteHeaderProps) {
       </a>
 
       <nav className="main-nav" aria-label="Main navigation">
-        {NAV_LINKS.map((link) => (
-          <a key={link.href} href={link.href}>
-            {link.label}
-          </a>
-        ))}
-        <a className="nav-github-link" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
-          GitHub <GitHubStars count={githubStars} variant="pill" />
-        </a>
+        <NavLinks githubStars={githubStars} githubLinkClassName="nav-github-link" />
       </nav>
 
       <div className="header-actions">
@@ -87,20 +116,11 @@ export function SiteHeader({ githubStars }: SiteHeaderProps) {
         aria-hidden={!menuOpen}
       >
         <nav className="mobile-nav" aria-label="Mobile navigation">
-          {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={closeMenu}>
-              {link.label}
-            </a>
-          ))}
-          <a href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>
-            Get started (README)
-          </a>
-          <a href={GITHUB_CONTRIBUTE_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>
-            Contribute on GitHub
-          </a>
-          <a className="mobile-nav-github" href={GITHUB_REPO_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>
-            GitHub <GitHubStars count={githubStars} variant="pill" />
-          </a>
+          <NavLinks
+            githubStars={githubStars}
+            githubLinkClassName="mobile-nav-github"
+            onNavigate={closeMenu}
+          />
         </nav>
       </div>
     </header>

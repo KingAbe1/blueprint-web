@@ -4,6 +4,7 @@ import { DownloadSection, DownloadSectionFallback } from "@/components/DownloadS
 import { FooterMeta, FooterMetaFallback } from "@/components/FooterMeta";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteHeaderWithStars } from "@/components/SiteHeaderWithStars";
+import { TiltSurface } from "@/components/TiltSurface";
 import {
   BRAND_NAME,
   GITHUB_CONTRIBUTE_URL,
@@ -38,7 +39,7 @@ export default function Home() {
         <div className="hero-visual">
           <div className="visual-grid" aria-hidden="true" />
           <div className="visual-glow" aria-hidden="true" />
-          <div className="hero-screenshot-shell">
+          <TiltSurface variant="hero" className="hero-screenshot-shell">
             <Image
               className="hero-screenshot"
               src={HERO_SCREENSHOT_PATH}
@@ -48,7 +49,7 @@ export default function Home() {
               priority
               sizes="(max-width: 768px) 100vw, min(630px, 52vw)"
             />
-          </div>
+          </TiltSurface>
         </div>
       </section>
 
@@ -74,7 +75,7 @@ export default function Home() {
           <div className="feature-grid feature-grid-three">
             <article className="feature-card feature-map-card">
               <div className="feature-card-copy"><span className="feature-kicker">01 / NEW PROJECT</span><h3>Shape the system before code.</h3><p>Product brief, build questions, and an architecture map driven by your decisions. Stack comes from the interview, not a single hard-coded template.</p></div>
-              <div className="mini-map" aria-hidden="true">
+              <TiltSurface variant="card" className="mini-map" aria-hidden="true">
                 <div className="map-node map-user"><span className="map-node-icon">◎</span><span>People</span></div>
                 <div className="map-connector connector-one" />
                 <div className="map-node map-app"><span className="map-node-icon">▦</span><span>Application</span><small>Modular core</small></div>
@@ -82,29 +83,29 @@ export default function Home() {
                 <div className="map-node map-data"><span className="map-node-icon">◫</span><span>Data layer</span></div>
                 <div className="map-node map-service"><span className="map-node-icon">⌁</span><span>Services</span></div>
                 <span className="map-caption">A system map shaped around your decisions</span>
-              </div>
+              </TiltSurface>
             </article>
 
             <article className="feature-card feature-code-card">
               <div className="feature-card-copy"><span className="feature-kicker">02 / EXISTING CODEBASE</span><h3>Understand a repo on your machine.</h3><p>Pick a local folder for overview, tree, dependencies, and quality signals. Deeper checks run when the repo matches a supported stack profile (Next.js today).</p></div>
-              <div className="file-preview" aria-hidden="true">
+              <TiltSurface variant="card" className="file-preview" aria-hidden="true">
                 <div className="file-preview-top"><span className="file-window-dots"><i /><i /><i /></span><span>inventory-app</span><span className="scan-badge"><i /> Scan complete</span></div>
                 <div className="file-row file-folder"><span>⌄</span><b>src</b><small>folder</small></div>
                 <div className="file-row"><span className="file-type type-blue">TS</span><b>products</b><small>domain</small></div>
                 <div className="file-row"><span className="file-type type-violet">TS</span><b>inventory</b><small>domain</small></div>
                 <div className="file-row"><span className="file-type type-green">TS</span><b>checkout</b><small>workflow</small></div>
                 <div className="file-insight"><span>✳</span><div><b>Architecture overview</b><small>Core modules and entry points mapped</small></div><span className="insight-arrow">↗</span></div>
-              </div>
+              </TiltSurface>
             </article>
 
             <article className="feature-card feature-handoff-card">
               <div className="feature-card-copy"><span className="feature-kicker">03 / HAND OFF</span><h3>Give your coding agent a clear starting point.</h3><p>Preview AGENTS.md, blueprint docs, and IDE rules. Download a zip or write files into a project folder from the desktop app.</p></div>
-              <div className="handoff-preview" aria-hidden="true">
+              <TiltSurface variant="card" className="handoff-preview" aria-hidden="true">
                 <div className="handoff-file"><span className="handoff-file-icon">MD</span><span><b>AGENTS.md</b><small>Agent entry point</small></span><span className="handoff-status">Ready</span></div>
                 <div className="handoff-file"><span className="handoff-file-icon blue-file">⌘</span><span><b>blueprint/architecture.md</b><small>System design & decisions</small></span><span className="handoff-status">Ready</span></div>
                 <div className="handoff-file"><span className="handoff-file-icon violet-file">↳</span><span><b>.cursor/rules</b><small>IDE-specific instructions</small></span><span className="handoff-status">Ready</span></div>
                 <div className="handoff-tools"><span>Works with</span><b>Cursor</b><b>VS Code</b><b>Codex</b><b>Claude Code</b><b>JetBrains</b></div>
-              </div>
+              </TiltSurface>
             </article>
           </div>
 
