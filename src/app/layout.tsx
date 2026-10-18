@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SoftwareApplicationJsonLd } from "@/components/SoftwareApplicationJsonLd";
 import { ThemeInitScript } from "./theme-init";
-import { BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
+import { BRAND_ICON_PATH, BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -41,6 +41,10 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
+  icons: {
+    icon: BRAND_ICON_PATH,
+    apple: BRAND_ICON_PATH,
+  },
 };
 
 export default function RootLayout({

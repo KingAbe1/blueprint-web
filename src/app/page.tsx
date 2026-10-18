@@ -10,6 +10,7 @@ import {
   GITHUB_CONTRIBUTE_URL,
   GITHUB_GET_STARTED_URL,
   GITHUB_REPO_URL,
+  BRAND_LOGO_MARK_PATH,
   HERO_SCREENSHOT_PATH,
 } from "@/constants/site";
 
@@ -150,7 +151,10 @@ export default function Home() {
       </section>
 
       <footer className="site-footer">
-        <a className="wordmark footer-wordmark" href="/"><span>{BRAND_NAME}</span></a>
+        <a className="wordmark footer-wordmark" href="/">
+          <Image className="wordmark-mark" src={BRAND_LOGO_MARK_PATH} alt="" width={20} height={20} />
+          <span>{BRAND_NAME}</span>
+        </a>
         <span>Architectural rigor for the generative era.</span>
         <Suspense fallback={<FooterMetaFallback />}>
           <FooterMeta />

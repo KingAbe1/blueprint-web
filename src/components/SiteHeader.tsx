@@ -2,7 +2,9 @@
 
 import { useEffect, useId, useState, type MouseEvent } from "react";
 import { GitHubStars } from "@/components/GitHubStars";
+import Image from "next/image";
 import {
+  BRAND_LOGO_MARK_PATH,
   BRAND_NAME,
   GITHUB_GET_STARTED_URL,
   GITHUB_REPO_URL,
@@ -81,6 +83,14 @@ export function SiteHeader({ githubStars }: SiteHeaderProps) {
   return (
     <header className="site-header">
       <a className="wordmark" href="/" aria-label={`${BRAND_NAME} home`} onClick={goHome}>
+        <Image
+          className="wordmark-mark"
+          src={BRAND_LOGO_MARK_PATH}
+          alt=""
+          width={24}
+          height={24}
+          priority
+        />
         <span>{BRAND_NAME}</span>
       </a>
 
