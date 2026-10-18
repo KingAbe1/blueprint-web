@@ -8,18 +8,26 @@ export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    let savedTheme: string | null = null;
+    const syncFromStorageOrSystem = () => {
+      let savedTheme: string | null = null;
 
-    try {
-      savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    } catch {
-      // Keep the page usable if browser storage is unavailable.
-    }
+      try {
+        savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+      } catch {
+        // Keep the page usable if browser storage is unavailable.
+      }
 
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const nextIsDark = savedTheme === "dark" || (savedTheme !== "light" && prefersDark);
-    setIsDark(nextIsDark);
-    document.documentElement.dataset.theme = nextIsDark ? "dark" : "light";
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const nextIsDark = savedTheme === "dark" || (savedTheme !== "light" && prefersDark);
+      setIsDark(nextIsDark);
+      document.documentElement.dataset.theme = nextIsDark ? "dark" : "light";
+    };
+
+    syncFromStorageOrSystem();
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    media.addEventListener("change", syncFromStorageOrSystem);
+    return () => media.removeEventListener("change", syncFromStorageOrSystem);
   }, []);
 
   const toggleTheme = () => {

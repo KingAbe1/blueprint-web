@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { FaviconSync } from "@/components/FaviconSync";
 import { SoftwareApplicationJsonLd } from "@/components/SoftwareApplicationJsonLd";
 import { ThemeInitScript } from "./theme-init";
 import { BRAND_ICON_PATH, BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
@@ -57,6 +58,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SoftwareApplicationJsonLd />
         <ThemeInitScript />
+        <FaviconSync />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
