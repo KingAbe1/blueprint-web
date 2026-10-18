@@ -16,12 +16,14 @@ import {
 export default function Home() {
   return (
     <main id="main-content">
-      <Suspense fallback={<SiteHeader githubStars={null} />}>
-        <SiteHeaderWithStars />
-      </Suspense>
+      <div className="hero-region">
+        <Suspense fallback={<SiteHeader githubStars={null} />}>
+          <SiteHeaderWithStars />
+        </Suspense>
 
-      <section className="hero-section">
-        <div className="hero-copy">
+        <section className="hero-band" aria-label="Introduction">
+        <div className="hero-section">
+          <div className="hero-copy">
           <h1>Move fast.<br /><span>Stay grounded.</span></h1>
           <p className="hero-description">
             {BRAND_NAME} is a local studio for planning a new product or scanning a repo you already have. You get agent handoff files or a codebase report, not generated app code. Nothing is uploaded to us.
@@ -35,23 +37,25 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-proof"><div className="proof-avatars" aria-hidden="true"><span>⌘</span><span>◈</span><span>✓</span></div><span>For people building real software with AI</span></div>
+          </div>
+          <div className="hero-visual">
+            <div className="visual-grid" aria-hidden="true" />
+            <div className="visual-glow" aria-hidden="true" />
+            <TiltSurface variant="hero" className="hero-screenshot-shell">
+              <Image
+                className="hero-screenshot"
+                src={HERO_SCREENSHOT_PATH}
+                alt={`${BRAND_NAME} app screenshot`}
+                width={3024}
+                height={1964}
+                priority
+                sizes="(max-width: 768px) 100vw, min(630px, 52vw)"
+              />
+            </TiltSurface>
+          </div>
         </div>
-        <div className="hero-visual">
-          <div className="visual-grid" aria-hidden="true" />
-          <div className="visual-glow" aria-hidden="true" />
-          <TiltSurface variant="hero" className="hero-screenshot-shell">
-            <Image
-              className="hero-screenshot"
-              src={HERO_SCREENSHOT_PATH}
-              alt={`${BRAND_NAME} app screenshot`}
-              width={3024}
-              height={1964}
-              priority
-              sizes="(max-width: 768px) 100vw, min(630px, 52vw)"
-            />
-          </TiltSurface>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <section className="trust-strip" aria-label={`${BRAND_NAME} principles`}>
         <span className="trust-intro">GOOD SOFTWARE STARTS BEFORE THE CODE</span>
