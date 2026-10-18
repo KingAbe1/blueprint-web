@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { IBM_Plex_Sans, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { FaviconSync } from "@/components/FaviconSync";
 import { SoftwareApplicationJsonLd } from "@/components/SoftwareApplicationJsonLd";
@@ -7,10 +7,16 @@ import { ThemeInitScript } from "./theme-init";
 import { BRAND_ICON_PATH, BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
 import "./globals.css";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const syne = Syne({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const siteDescription =
@@ -54,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${ibmPlexSans.variable} ${syne.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <SoftwareApplicationJsonLd />
         <ThemeInitScript />

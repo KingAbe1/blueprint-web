@@ -16,6 +16,7 @@ type SiteHeaderProps = {
 
 const NAV_LINKS = [
   { href: "#features", label: "What it does" },
+  { href: "#supported-profiles", label: "Supported stacks" },
   { href: "#download", label: "Download" },
   { href: "#faq", label: "FAQ" },
   { href: GITHUB_REPO_URL, label: "GitHub", external: true, showStars: true },

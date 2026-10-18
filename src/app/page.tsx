@@ -13,6 +13,8 @@ import {
   GITHUB_REPO_URL,
   HERO_SCREENSHOT_PATH,
 } from "@/constants/site";
+import { SupportedFrameworkProfilesSection } from "@/components/SupportedFrameworkProfilesSection";
+import { supportedDeepProfilesSummary } from "@/constants/supportedAnalysisProfiles";
 
 export default function Home() {
   return (
@@ -23,46 +25,53 @@ export default function Home() {
         </Suspense>
 
         <section className="hero-band" aria-label="Introduction">
-        <div className="hero-section">
-          <div className="hero-copy">
-          <h1>Move fast.<br /><span>Stay grounded.</span></h1>
-          <p className="hero-description">
-            {BRAND_NAME} is a local studio for planning a new product or scanning a repo you already have. You get agent handoff files or a codebase report, not generated app code. Nothing is uploaded to us.
-          </p>
-          <div className="hero-actions">
-            <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
-              Get started <span>↗</span>
-            </a>
-            <a className="text-link" href="#features">
-              See what it does <span>→</span>
-            </a>
+          <div className="hero-section">
+            <div className="hero-copy">
+              <p className="hero-brand">
+                <BrandMark variant="mark" width={20} height={20} priority className="hero-brand-mark" />
+                <span>{BRAND_NAME}</span>
+              </p>
+              <h1>
+                Move fast.
+                <br />
+                <span>Stay grounded.</span>
+              </h1>
+              <p className="hero-description">
+                A local studio for planning a new product or scanning a repo you already have. Agent handoffs or a codebase report — not generated app code. Nothing leaves your machine.
+              </p>
+              <div className="hero-actions">
+                <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
+                  Get started <span>↗</span>
+                </a>
+                <a className="text-link" href="#features">
+                  See what it does <span>→</span>
+                </a>
+              </div>
+            </div>
+            <div className="hero-visual">
+              <div className="visual-grid" aria-hidden="true" />
+              <div className="visual-glow" aria-hidden="true" />
+              <TiltSurface variant="hero" className="hero-screenshot-shell">
+                <Image
+                  className="hero-screenshot"
+                  src={HERO_SCREENSHOT_PATH}
+                  alt={`${BRAND_NAME} app screenshot`}
+                  width={3024}
+                  height={1964}
+                  priority
+                  sizes="(max-width: 768px) 100vw, min(720px, 58vw)"
+                />
+              </TiltSurface>
+            </div>
           </div>
-          <div className="hero-proof"><div className="proof-avatars" aria-hidden="true"><span>⌘</span><span>◈</span><span>✓</span></div><span>For people building real software with AI</span></div>
-          </div>
-          <div className="hero-visual">
-            <div className="visual-grid" aria-hidden="true" />
-            <div className="visual-glow" aria-hidden="true" />
-            <TiltSurface variant="hero" className="hero-screenshot-shell">
-              <Image
-                className="hero-screenshot"
-                src={HERO_SCREENSHOT_PATH}
-                alt={`${BRAND_NAME} app screenshot`}
-                width={3024}
-                height={1964}
-                priority
-                sizes="(max-width: 768px) 100vw, min(630px, 52vw)"
-              />
-            </TiltSurface>
-          </div>
-        </div>
         </section>
       </div>
 
       <section className="trust-strip" aria-label={`${BRAND_NAME} principles`}>
-        <span className="trust-intro">GOOD SOFTWARE STARTS BEFORE THE CODE</span>
-        <div><span className="trust-icon">⌗</span> Architecture first</div>
-        <div><span className="trust-icon">✓</span> Tests as guardrails</div>
-        <div><span className="trust-icon">⤢</span> Production in mind</div>
+        <span className="trust-intro">Before the code</span>
+        <div>Architecture first</div>
+        <div>Tests as guardrails</div>
+        <div>Production in mind</div>
       </section>
 
       <section className="features-section" id="features">
@@ -70,10 +79,10 @@ export default function Home() {
           <div className="section-heading feature-heading">
             <div>
               <span className="section-eyebrow">What it does</span>
-              <h2>Plan a new product, scan what you have, hand off to your agent.</h2>
+              <h2>Plan, scan, hand off.</h2>
             </div>
             <p>
-              Start greenfield from a brief or open a local folder for brownfield analysis. {BRAND_NAME} produces maps, constraints, and export files for Cursor, VS Code, Claude Code, and similar tools. Optional AI uses your own provider keys.
+              Greenfield from a brief, or open a local folder. You get maps, constraints, and exports for Cursor, VS Code, Claude Code, and similar tools. Optional AI uses your own keys.
             </p>
           </div>
 
@@ -92,7 +101,7 @@ export default function Home() {
             </article>
 
             <article className="feature-card feature-code-card">
-              <div className="feature-card-copy"><span className="feature-kicker">02 / EXISTING CODEBASE</span><h3>Understand a repo on your machine.</h3><p>Pick a local folder for overview, tree, dependencies, and quality signals. Deeper checks run when the repo matches a supported stack profile (Next.js today).</p></div>
+              <div className="feature-card-copy"><span className="feature-kicker">02 / EXISTING CODEBASE</span><h3>Understand a repo on your machine.</h3><p>Pick a local folder for overview, tree, dependencies, and quality signals. Deep framework review applies when your stack matches a supported profile.</p><a className="feature-inline-link" href="#supported-profiles">See supported profiles <span aria-hidden="true">→</span></a></div>
               <TiltSurface variant="card" className="file-preview" aria-hidden="true">
                 <div className="file-preview-top"><span className="file-window-dots"><i /><i /><i /></span><span>inventory-app</span><span className="scan-badge"><i /> Scan complete</span></div>
                 <div className="file-row file-folder"><span>⌄</span><b>src</b><small>folder</small></div>
@@ -114,16 +123,27 @@ export default function Home() {
             </article>
           </div>
 
-          <div className="integrations-strip"><span className="integrations-label">Fits into your workflow</span><div className="integration-names"><span><i className="tool-cursor">◈</i> Cursor</span><span><i className="tool-vscode">⌘</i> VS Code</span><span><i className="tool-codex">✳</i> Codex</span><span><i className="tool-claude">✻</i> Claude Code</span><span><i className="tool-jetbrains">JB</i> JetBrains</span></div></div>
+          <div className="integrations-strip">
+            <span className="integrations-label">Works with</span>
+            <div className="integration-names">
+              <span>Cursor</span>
+              <span>VS Code</span>
+              <span>Codex</span>
+              <span>Claude Code</span>
+              <span>JetBrains</span>
+            </div>
+          </div>
         </div>
       </section>
+
+      <SupportedFrameworkProfilesSection />
 
       <section className="faq-band" id="faq">
         <div className="faq-section section-wrap">
           <div className="faq-intro"><span className="section-eyebrow">FAQ</span><h2>Good to know before you begin.</h2><p>{BRAND_NAME} works alongside the tools you already use.</p></div>
           <div className="faq-list">
             <details className="faq-item"><summary>Does {BRAND_NAME} write my application code?<span>+</span></summary><p>No. It helps you plan, scan, and export handoff context. Your coding agent or IDE implements the application.</p></details>
-            <details className="faq-item"><summary>Can I use it with an existing project?<span>+</span></summary><p>Yes. Scan a local codebase for structure, architecture signals, and quality checks. Deeper analysis applies when the repo matches a supported stack profile (Next.js today).</p></details>
+            <details className="faq-item"><summary>Can I use it with an existing project?<span>+</span></summary><p>Yes. Scan a local codebase for structure, architecture signals, and quality checks. Deeper analysis applies when the repo matches a supported deep profile ({supportedDeepProfilesSummary()} today). See <a href="#supported-profiles">supported profiles</a> for the full list.</p></details>
             <details className="faq-item"><summary>Is it open source?<span>+</span></summary><p>Yes, MIT on <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">GitHub</a>. Forks are welcome; please rebrand if you ship your own product.</p></details>
             <details className="faq-item"><summary>Is my data sent to your servers?<span>+</span></summary><p>No. Specs and scan results stay on your machine. If you turn on AI, requests go directly to the provider you configure.</p></details>
             <details className="faq-item"><summary>Do I need AI to use it?<span>+</span></summary><p>Much of the app works without AI. Greenfield build questions need a configured provider; scans and handoff preview do not.</p></details>
@@ -136,8 +156,12 @@ export default function Home() {
       </section>
 
       <section className="closing-section section-wrap" id="get-started">
-        <p className="section-eyebrow">Open source (MIT)</p>
-        <h2>Better software starts<br />with better questions.</h2>
+        <p className="section-eyebrow">Open source · MIT</p>
+        <h2>
+          Better software starts
+          <br />
+          with better questions.
+        </h2>
         <div className="hero-actions closing-actions">
           <a className="button-primary github-primary-cta" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
             Get started
@@ -147,7 +171,7 @@ export default function Home() {
             Contribute on GitHub <span>↗</span>
           </a>
         </div>
-        <p className="closing-run-hint">MIT licensed. Star the repo or open an issue if you get stuck.</p>
+        <p className="closing-run-hint">Star the repo or open an issue if you get stuck.</p>
       </section>
 
       <footer className="site-footer">
