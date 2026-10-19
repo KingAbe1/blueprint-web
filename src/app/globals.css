@@ -395,11 +395,7 @@ html[data-theme="light"] .closing-section .github-primary-cta .github-stars--pil
 .supported-profiles-section {
   padding: 48px 0;
   scroll-margin-top: 88px;
-  background:
-    linear-gradient(180deg, #f3f6fb 0%, #eef3fa 100%),
-    linear-gradient(rgba(47, 94, 240, .03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47, 94, 240, .03) 1px, transparent 1px);
-  background-size: auto, 40px 40px, 40px 40px;
+  background: #f3f5f8;
   border-block: 1px solid var(--line);
 }
 .supported-profiles-strip {
@@ -976,14 +972,18 @@ html[data-theme="dark"] .integration-names i { color: #93c5fd; }
 html[data-theme="dark"] .feature-inline-link { color: #93c5fd; }
 html[data-theme="dark"] .feature-inline-link span { color: #60a5fa; }
 html[data-theme="dark"] .supported-profiles-section {
-  background:
-    linear-gradient(180deg, #0d121c 0%, #10141d 100%),
-    linear-gradient(rgba(59, 130, 246, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, .035) 1px, transparent 1px);
-  background-size: auto, 40px 40px, 40px 40px;
+  background: var(--surface-canvas);
+  background-image: none;
   border-color: var(--border-subtle);
 }
-html[data-theme="dark"] .supported-profiles-strip { border: 0; background: transparent; box-shadow: none; }
+html[data-theme="dark"] .supported-profiles-strip {
+  border: 0;
+  border-radius: 0;
+  padding: 8px 0;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+}
 html[data-theme="dark"] .supported-profiles-label { color: #91a8e8; }
 html[data-theme="dark"] .supported-profiles-copy h2 { color: var(--text-primary); }
 html[data-theme="dark"] .principles-section { background: var(--surface-raised); }
