@@ -25,13 +25,86 @@ export async function getGitHubStarCount(): Promise<number | null> {
   }
 }
 
+export type ReleasePlatform = "apple" | "windows" | "linux";
+
+export type ReleaseDownload = {
+  id: string;
+  label: string;
+  detail: string;
+  url: string;
+  fileName: string;
+  platform: ReleasePlatform;
+};
+
 export type GitHubReleaseSummary = {
   tagName: string;
   htmlUrl: string;
   publishedAt: string;
+  /** @deprecated Prefer `downloads` */
   macDownloadUrl: string | null;
+  /** @deprecated Prefer `downloads` */
   macAssetName: string | null;
+  downloads: ReleaseDownload[];
 };
+
+type GitHubAsset = { name?: string; browser_download_url?: string };
+
+function pickAsset(assets: GitHubAsset[], predicate: (name: string) => boolean): GitHubAsset | null {
+  return assets.find((asset) => predicate(asset.name?.toLowerCase() ?? "")) ?? null;
+}
+
+function toDownload(
+  id: string,
+  label: string,
+  detail: string,
+  platform: ReleasePlatform,
+  asset: GitHubAsset | null,
+): ReleaseDownload | null {
+  if (!asset?.name || !asset.browser_download_url) return null;
+  return {
+    id,
+    label,
+    detail,
+    platform,
+    url: asset.browser_download_url,
+    fileName: asset.name,
+  };
+}
+
+function collectDownloads(assets: GitHubAsset[]): ReleaseDownload[] {
+  const picks = [
+    toDownload(
+      "mac-arm",
+      "macOS",
+      "Apple Silicon",
+      "apple",
+      pickAsset(assets, (name) => name.endsWith(".dmg") && name.includes("aarch64")),
+    ),
+    toDownload(
+      "mac-intel",
+      "macOS",
+      "Intel",
+      "apple",
+      pickAsset(assets, (name) => name.endsWith(".dmg") && (name.includes("_x64") || name.includes("x64."))),
+    ),
+    toDownload(
+      "windows",
+      "Windows",
+      "Installer",
+      "windows",
+      pickAsset(assets, (name) => name.endsWith("-setup.exe") || name.endsWith(".msi")),
+    ),
+    toDownload(
+      "linux",
+      "Linux",
+      "AppImage",
+      "linux",
+      pickAsset(assets, (name) => name.endsWith(".appimage")),
+    ),
+  ];
+
+  return picks.filter((item): item is ReleaseDownload => item !== null);
+}
 
 export async function getLatestRelease(): Promise<GitHubReleaseSummary | null> {
   try {
@@ -44,28 +117,21 @@ export async function getLatestRelease(): Promise<GitHubReleaseSummary | null> {
       tag_name?: string;
       html_url?: string;
       published_at?: string;
-      assets?: { name?: string; browser_download_url?: string }[];
+      assets?: GitHubAsset[];
     };
     if (!data.tag_name || !data.html_url) return null;
 
-    const macAsset =
-      data.assets?.find((asset) => {
-        const name = asset.name?.toLowerCase() ?? "";
-        return (
-          name.includes("darwin") ||
-          name.includes("macos") ||
-          name.includes("mac") ||
-          name.endsWith(".dmg") ||
-          name.endsWith(".app.tar.gz")
-        );
-      }) ?? null;
+    const assets = data.assets ?? [];
+    const downloads = collectDownloads(assets);
+    const macDownload = downloads.find((item) => item.id.startsWith("mac-")) ?? null;
 
     return {
       tagName: data.tag_name,
       htmlUrl: data.html_url,
       publishedAt: data.published_at ?? "",
-      macDownloadUrl: macAsset?.browser_download_url ?? null,
-      macAssetName: macAsset?.name ?? null,
+      macDownloadUrl: macDownload?.url ?? null,
+      macAssetName: macDownload?.fileName ?? null,
+      downloads,
     };
   } catch {
     return null;

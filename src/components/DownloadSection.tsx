@@ -3,48 +3,92 @@ import {
   GITHUB_GET_STARTED_URL,
   GITHUB_RELEASES_URL,
 } from "@/constants/site";
-import { getLatestRelease } from "@/lib/githubRepo";
+import { getLatestRelease, type GitHubReleaseSummary } from "@/lib/githubRepo";
+import { PlatformIcon } from "@/components/PlatformIcons";
 
-function DownloadReleaseNote({ latestRelease }: { latestRelease: Awaited<ReturnType<typeof getLatestRelease>> }) {
-  if (latestRelease) {
-    return <> Latest release: {latestRelease.tagName}.</>;
-  }
-  return <> Pre-built installers will appear on GitHub Releases when we publish them.</>;
+function DownloadLinks({ latestRelease }: { latestRelease: GitHubReleaseSummary | null }) {
+  return (
+    <div className="download-links">
+      <a className="text-link" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
+        Build from source <span>↗</span>
+      </a>
+      <a className="text-link" href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
+        {latestRelease ? "All release assets" : "GitHub Releases"} <span>↗</span>
+      </a>
+      {latestRelease ? (
+        <a className="text-link" href={GITHUB_CHANGELOG_URL} target="_blank" rel="noreferrer">
+          Changelog <span>↗</span>
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
+function MacosFootnote() {
+  return (
+    <p className="download-macos-footnote">
+      <PlatformIcon platform="apple" className="download-macos-footnote-icon" />
+      <span>
+        macOS builds aren&apos;t notarized yet. If Gatekeeper says the app is damaged, run{" "}
+        <code>xattr -cr &quot;/Applications/blueprint studio.app&quot;</code> then reopen — or{" "}
+        <a href="#faq-macos">see the FAQ</a>.
+      </span>
+    </p>
+  );
 }
 
 export async function DownloadSection() {
   const latestRelease = await getLatestRelease();
+  const downloads = latestRelease?.downloads ?? [];
+  const hasMacDownloads = downloads.some((item) => item.platform === "apple");
 
   return (
     <div className="download-block section-wrap" id="download" aria-labelledby="download-heading">
-      <div className="download-intro">
-        <span className="section-eyebrow">Run it locally</span>
-        <h2 id="download-heading">Install and run</h2>
-        <p>
-          Clone the repo and follow the README. Use <code>npm run dev</code> for the web build or{" "}
-          <code>npm run tauri:dev</code> for the desktop app.
-          <DownloadReleaseNote latestRelease={latestRelease} />
-        </p>
+      <div className="download-header">
+        <div className="download-intro">
+          <span className="section-eyebrow">Run it locally</span>
+          <h2 id="download-heading">Install and run</h2>
+          <p>
+            Download a desktop build, or clone the repo and run it yourself.
+            {latestRelease ? (
+              <>
+                {" "}
+                Latest release: <span className="download-version">{latestRelease.tagName}</span>.
+              </>
+            ) : (
+              <> Pre-built installers appear on GitHub Releases when published.</>
+            )}
+          </p>
+        </div>
+        <DownloadLinks latestRelease={latestRelease} />
       </div>
-      <div className="download-actions">
-        <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
-          Build from source <span>↗</span>
-        </a>
-        {latestRelease?.macDownloadUrl ? (
-          <a className="download-secondary-cta" href={latestRelease.macDownloadUrl} target="_blank" rel="noreferrer">
-            Download for macOS
-            <span className="download-asset-name">{latestRelease.macAssetName}</span>
+
+      {downloads.length > 0 ? (
+        <ul className="download-platform-grid">
+          {downloads.map((item) => (
+            <li key={item.id}>
+              <a className="download-platform-card" href={item.url} target="_blank" rel="noreferrer">
+                <span className="download-platform-top">
+                  <PlatformIcon platform={item.platform} />
+                  <span className="download-platform-copy">
+                    <span className="download-platform-label">{item.label}</span>
+                    <span className="download-platform-detail">{item.detail}</span>
+                  </span>
+                </span>
+                <span className="download-platform-file">{item.fileName}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="download-actions">
+          <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
+            Build from source <span>↗</span>
           </a>
-        ) : null}
-        <a className="text-link" href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
-          {latestRelease ? "All release assets" : "GitHub Releases"} <span>↗</span>
-        </a>
-        {latestRelease ? (
-          <a className="text-link" href={GITHUB_CHANGELOG_URL} target="_blank" rel="noreferrer">
-            Changelog <span>↗</span>
-          </a>
-        ) : null}
-      </div>
+        </div>
+      )}
+
+      {hasMacDownloads ? <MacosFootnote /> : null}
     </div>
   );
 }
@@ -52,21 +96,19 @@ export async function DownloadSection() {
 export function DownloadSectionFallback() {
   return (
     <div className="download-block section-wrap" id="download" aria-labelledby="download-heading" aria-busy="true">
-      <div className="download-intro">
-        <span className="section-eyebrow">Run it locally</span>
-        <h2 id="download-heading">Install and run</h2>
-        <p>
-          Clone the repo and follow the README. Use <code>npm run dev</code> for the web build or{" "}
-          <code>npm run tauri:dev</code> for the desktop app.
-        </p>
+      <div className="download-header">
+        <div className="download-intro">
+          <span className="section-eyebrow">Run it locally</span>
+          <h2 id="download-heading">Install and run</h2>
+          <p>Download a desktop build, or clone the repo and run it yourself.</p>
+        </div>
+        <DownloadLinks latestRelease={null} />
       </div>
-      <div className="download-actions">
-        <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
-          Build from source <span>↗</span>
-        </a>
-        <a className="text-link" href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
-          GitHub Releases <span>↗</span>
-        </a>
+      <div className="download-platform-grid download-platform-grid--skeleton" aria-hidden="true">
+        <div className="download-platform-card" />
+        <div className="download-platform-card" />
+        <div className="download-platform-card" />
+        <div className="download-platform-card" />
       </div>
     </div>
   );

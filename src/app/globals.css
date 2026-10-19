@@ -438,34 +438,184 @@ html[data-theme="light"] .closing-section .github-primary-cta .github-stars--pil
 .principle-item p { max-width: 400px; margin: 7px 0 0; color: #93a0b8; font-size: var(--copy-size); line-height: var(--copy-leading); }
 .principle-check { width: 19px; height: 19px; display: grid; place-items: center; color: #9bb1f2; background: #ffffff0c; border: 1px solid #ffffff15; border-radius: 50%; font-size: 9px; }
 .download-block {
-  padding-top: 48px;
+  padding-top: 56px;
   padding-bottom: 72px;
   border-top: 1px solid #e8ecf2;
+  scroll-margin-top: 88px;
 }
-.download-intro { max-width: 640px; }
-.download-intro h2 { margin: 15px 0 12px; color: #18243a; font-size: clamp(30px, 3.5vw, 38px); line-height: 1.18; letter-spacing: -.05em; font-weight: 600; }
-.download-intro p { max-width: 52ch; margin: 0; color: #7b8799; font-size: var(--copy-size); line-height: var(--copy-leading); }
-.download-intro code { padding: 2px 6px; border-radius: 5px; background: #eef2f8; color: #334155; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; }
+.download-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px 40px;
+  margin-bottom: 28px;
+}
+.download-intro { max-width: 560px; min-width: 0; }
+.download-intro h2 {
+  margin: 12px 0 12px;
+  color: #152033;
+  font-size: clamp(32px, 3.5vw, 42px);
+  line-height: 1.12;
+  letter-spacing: -.045em;
+  font-weight: 700;
+}
+.download-intro p {
+  max-width: 48ch;
+  margin: 0;
+  color: #5c6b82;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.download-version {
+  color: #243247;
+  font-weight: 650;
+}
+.download-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 18px;
+  flex: 0 1 auto;
+}
 .download-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 14px 22px;
-  margin-top: 22px;
+  margin-top: 8px;
 }
-.download-secondary-cta { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 12px 14px; border: 1px solid #d5def3; border-radius: var(--radius-control); background: var(--surface-card); color: #1a2a48; font-size: 12px; font-weight: 650; box-shadow: 0 4px 14px #293d6010; transition: border-color .18s ease, transform .18s ease; }
-.download-secondary-cta:hover { border-color: #93c5fd; transform: translateY(-1px); }
-.download-asset-name { color: #6b788d; font-size: 9px; font-weight: 500; }
+.download-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.download-platform-grid--skeleton {
+  display: grid;
+}
+.download-platform-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 132px;
+  padding: 18px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  background: var(--surface-card);
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+a.download-platform-card:hover {
+  border-color: #c4d2ef;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+.download-platform-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.download-platform-icon {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  color: #152033;
+}
+.download-platform-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.download-platform-label {
+  color: #152033;
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.03em;
+}
+.download-platform-detail {
+  color: #3d63d4;
+  font-size: 12px;
+  font-weight: 650;
+}
+.download-platform-file {
+  margin-top: auto;
+  color: #5c6b82;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-all;
+}
+.download-macos-footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 18px 0 0;
+  max-width: 720px;
+  color: #5c6b82;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.download-macos-footnote-icon {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  color: #6b7c93;
+}
+.download-macos-footnote a {
+  color: #3d63d4;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.download-macos-footnote a:hover { color: #244fe0; }
+.download-macos-footnote code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e8eef8;
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
 .faq-band { border-block: 1px solid var(--line); background: #eef2f8; }
 .faq-section { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; padding-top: 88px; padding-bottom: 56px; }
 .faq-intro h2 { margin: 15px 0 12px; color: #152033; font-size: clamp(32px, 3.5vw, 42px); line-height: 1.12; letter-spacing: -.045em; font-weight: 700; }
 .faq-intro p { max-width: 280px; margin: 0; color: #5c6b82; font-size: 14px; line-height: 1.65; }
 .faq-list { border-top: 1px solid #dce3ee; }
-.faq-item { border-bottom: 1px solid #dce3ee; }
+.faq-item { border-bottom: 1px solid #dce3ee; scroll-margin-top: 96px; }
 .faq-item summary { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 18px; cursor: pointer; list-style: none; color: #243247; font-size: 15px; font-weight: 600; }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary:focus-visible { outline: 3px solid #83a1ff; outline-offset: 3px; border-radius: 4px; }
-.faq-item summary span { width: 20px; height: 20px; display: grid; place-items: center; flex: 0 0 20px; border: 1px solid #e3e8f0; border-radius: 50%; color: #7587ae; font-size: 13px; font-weight: 400; transition: transform .18s ease, background .18s ease; }
+.faq-item summary span {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 22px;
+  border: 1px solid #e3e8f0;
+  border-radius: 50%;
+  color: #7587ae;
+  font-size: 0;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+}
+.faq-item summary span::before,
+.faq-item summary span::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+}
+.faq-item summary span::before { width: 9px; height: 1.5px; }
+.faq-item summary span::after { width: 1.5px; height: 9px; }
 .faq-item[open] summary span { color: #fff; border-color: #5479e3; background: #5479e3; transform: rotate(45deg); }
 .faq-item p { max-width: 520px; margin: -3px 40px 22px 0; color: #5c6b82; font-size: 14px; line-height: 1.65; }
 .closing-section {
@@ -562,14 +712,9 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .mini-map { min-height: 200px; width: 100%; }
   .integrations-strip { align-items: flex-start; flex-direction: column; gap: 12px; }
   .integration-names { width: 100%; flex-wrap: wrap; gap: 10px 16px; }
-  .download-actions {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 12px;
-  }
-  .download-actions .button-primary { width: 100%; box-sizing: border-box; }
-  .download-actions .text-link { width: 100%; justify-content: center; min-height: 44px; }
+  .download-header { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .download-links { justify-content: flex-start; }
+  .download-platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .faq-section { gap: 45px; }
 }
 @media (max-width: 760px) {
@@ -586,7 +731,6 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .hero-copy h1 { font-size: clamp(40px, 10vw, 52px); }
   .hero-description { font-size: 15px; max-width: none; }
   .hero-actions,
-  .download-actions,
   .closing-section .closing-actions {
     flex-direction: column;
     align-items: stretch;
@@ -595,19 +739,19 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
     gap: 12px;
   }
   .hero-actions .button-primary,
-  .download-actions .button-primary,
   .closing-section .closing-actions .button-primary,
   .closing-section .closing-actions .github-primary-cta {
     width: 100%;
     box-sizing: border-box;
   }
   .hero-actions .text-link,
-  .download-actions .text-link,
   .closing-section .closing-actions .text-link {
     width: 100%;
     justify-content: center;
     min-height: 44px;
   }
+  .download-platform-grid { grid-template-columns: 1fr; }
+  .download-platform-card { min-height: 0; }
   .hero-visual { margin: 32px -8px 0; min-height: 300px; justify-content: center; }
   .hero-screenshot-shell { width: 100%; }
   .tilt-surface--hero {
@@ -647,7 +791,7 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .principle-item { grid-template-columns: 27px 1fr 20px; gap: 10px; }
   .download-block { padding-top: 40px; padding-bottom: 52px; }
   .download-intro p { max-width: none; }
-  .download-actions { margin-top: 20px; }
+  .download-macos-footnote { max-width: none; }
   .faq-section { display: block; padding-top: 58px; padding-bottom: 60px; }
   .faq-intro p { max-width: 340px; }
   .faq-list { margin-top: 25px; }
@@ -851,13 +995,21 @@ html[data-theme="dark"] .principle-list, html[data-theme="dark"] .principle-item
 html[data-theme="dark"] .download-block { border-color: var(--border-subtle); }
 html[data-theme="dark"] .download-intro h2 { color: var(--text-primary); }
 html[data-theme="dark"] .download-intro p { color: var(--text-muted); }
-html[data-theme="dark"] .download-intro code { background: rgba(255, 255, 255, 0.06); color: var(--text-secondary); }
+html[data-theme="dark"] .download-version { color: var(--text-secondary); }
 html[data-theme="dark"] .header-cta.header-cta-primary { background: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.45); color: #fff; box-shadow: 0 6px 16px rgba(59, 130, 246, 0.22); }
 html[data-theme="dark"] .header-cta.header-cta-primary:hover { background: #2563eb; border-color: rgba(37, 99, 235, 0.6); }
 html[data-theme="dark"] .header-cta.header-cta-primary .header-cta-arrow { color: #dbeafe; }
-html[data-theme="dark"] .download-secondary-cta { border-color: var(--border-medium); background: var(--surface-panel-alt); color: var(--text-primary); }
-html[data-theme="dark"] .download-secondary-cta:hover { border-color: var(--border-strong); }
-html[data-theme="dark"] .download-asset-name { color: var(--text-muted); }
+html[data-theme="dark"] .download-platform-card { border-color: var(--border-subtle); background: var(--surface-panel-alt); }
+html[data-theme="dark"] a.download-platform-card:hover { border-color: var(--border-strong); box-shadow: 0 12px 28px rgba(0, 0, 0, .28); }
+html[data-theme="dark"] .download-platform-icon { color: #f4f4f6; }
+html[data-theme="dark"] .download-platform-label { color: #f4f4f6; }
+html[data-theme="dark"] .download-platform-detail { color: #93c5fd; }
+html[data-theme="dark"] .download-platform-file { color: #a8b3c7; }
+html[data-theme="dark"] .download-macos-footnote { color: var(--text-muted); }
+html[data-theme="dark"] .download-macos-footnote-icon { color: #94a3b8; }
+html[data-theme="dark"] .download-macos-footnote a { color: #93c5fd; }
+html[data-theme="dark"] .download-macos-footnote a:hover { color: #bfdbfe; }
+html[data-theme="dark"] .download-macos-footnote code { background: rgba(255, 255, 255, 0.06); color: var(--text-secondary); }
 html[data-theme="dark"] .faq-intro h2 { color: var(--text-primary); }
 html[data-theme="dark"] .faq-intro p { color: var(--text-muted); }
 html[data-theme="dark"] .faq-band { border-color: var(--border-subtle); background: var(--surface-canvas); }
