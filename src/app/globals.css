@@ -400,7 +400,7 @@ html[data-theme="light"] .closing-section .github-primary-cta .github-stars--pil
 }
 .supported-profiles-strip {
   min-height: 140px;
-  padding: 8px 0;
+  padding-block: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -410,12 +410,22 @@ html[data-theme="light"] .closing-section .github-primary-cta .github-stars--pil
   background: transparent;
   box-shadow: none;
 }
-.supported-profiles-copy { min-width: 0; }
+.supported-profiles-copy { min-width: 0; flex: 1 1 auto; }
 .supported-profiles-label { display: block; margin: 0 0 10px; color: #3d63d4; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .supported-profiles-copy h2 { max-width: 620px; margin: 0; color: #152033; font-size: clamp(28px, 3vw, 36px); line-height: 1.15; letter-spacing: -.045em; font-weight: 700; }
-.supported-framework-logos { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(18px, 3vw, 32px); margin: 0; padding: 0; list-style: none; }
+.supported-framework-logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2.5vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 0 1 auto;
+}
 .supported-framework-logos li { display: grid; place-items: center; }
-.supported-framework-logos img { display: block; width: 64px; height: 64px; object-fit: contain; }
+.supported-framework-logos img { display: block; width: 56px; height: 56px; object-fit: contain; }
 
 .principles-section { position: relative; overflow: hidden; background: #121d32; color: #fff; }
 .principles-section::before { content: ""; position: absolute; width: 500px; height: 500px; top: -280px; left: -120px; border-radius: 50%; background: #315bdd; filter: blur(145px); opacity: .2; }
@@ -691,7 +701,21 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .trust-strip { gap: 28px; }
   .trust-intro { display: none; }
   .features-section { padding: 64px 0 56px; }
-  .supported-profiles-section { padding: 32px 0; }
+  .supported-profiles-section { padding: 36px 0; }
+  .supported-profiles-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    min-height: 0;
+  }
+  .supported-framework-logos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    justify-items: center;
+    gap: 14px 12px;
+  }
+  .supported-framework-logos img { width: 48px; height: 48px; }
   .feature-heading { margin-bottom: 28px; }
   .feature-heading h2 { font-size: clamp(28px, 6vw, 36px); line-height: 1.15; }
   .feature-heading > p { max-width: none; margin-top: 14px; }
@@ -768,11 +792,19 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .workflow-card { min-height: 0; padding: 20px; }
   .card-description { min-height: 0; }
   .features-section { padding: 52px 0 48px; }
-  .supported-profiles-section { padding: 24px 0; }
-  .supported-profiles-strip { min-height: 0; padding: 0; gap: 20px; flex-direction: column; align-items: flex-start; }
+  .supported-profiles-section { padding: 28px 0; }
+  .supported-profiles-strip { padding-block: 0; gap: 20px; width: 100%; }
+  .supported-profiles-copy { width: 100%; }
   .supported-profiles-label { margin-bottom: 8px; font-size: 11px; }
   .supported-profiles-copy h2 { max-width: none; font-size: clamp(24px, 6vw, 30px); }
-  .supported-framework-logos img { width: 50px; height: 50px; }
+  .supported-framework-logos {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    justify-items: center;
+    gap: 12px 8px;
+  }
+  .supported-framework-logos img { width: 40px; height: 40px; }
   .feature-heading { margin-bottom: 22px; }
   .feature-heading h2 { font-size: clamp(26px, 8.2vw, 32px); }
   .feature-grid { gap: 10px; }
@@ -979,7 +1011,6 @@ html[data-theme="dark"] .supported-profiles-section {
 html[data-theme="dark"] .supported-profiles-strip {
   border: 0;
   border-radius: 0;
-  padding: 8px 0;
   background: transparent;
   background-image: none;
   box-shadow: none;

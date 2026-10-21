@@ -28,6 +28,27 @@ export const SUPPORTED_DEEP_PROFILE_DETAILS: readonly SupportedDeepProfileDetail
     logoSrc: "/frameworks/typescript.svg",
     availability: "live",
   },
+  {
+    id: "nestjs",
+    title: "NestJS",
+    shortName: "NestJS",
+    logoSrc: "/frameworks/nestjs.svg",
+    availability: "live",
+  },
+  {
+    id: "nodejs",
+    title: "Node.js",
+    shortName: "Node.js",
+    logoSrc: "/frameworks/nodejs.svg",
+    availability: "live",
+  },
+  {
+    id: "bun",
+    title: "Bun",
+    shortName: "Bun",
+    logoSrc: "/frameworks/bun.svg",
+    availability: "live",
+  },
 ];
 
 /** Live deep profiles only (FAQ copy; parity with the desktop app constant). */
