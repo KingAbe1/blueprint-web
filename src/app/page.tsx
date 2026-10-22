@@ -37,7 +37,7 @@ export default function Home() {
                 <span>Stay grounded.</span>
               </h1>
               <p className="hero-description">
-                A local studio for planning a new product or scanning a repo you already have. Agent handoffs or a codebase report — not generated app code. Nothing leaves your machine.
+                Local studio to plan new products or scan existing repos. Agent handoffs and codebase quality reports, on your machine.
               </p>
               <div className="hero-actions">
                 <a className="button-primary" href={GITHUB_GET_STARTED_URL} target="_blank" rel="noreferrer">
@@ -82,7 +82,7 @@ export default function Home() {
               <h2>Plan, scan, hand off.</h2>
             </div>
             <p>
-              Greenfield from a brief, or open a local folder. You get maps, constraints, and exports for Cursor, VS Code, Claude Code, and similar tools. Optional AI uses your own keys.
+              Plan a new product from a brief, or open a local repo for a quality report. Export agent handoffs for Cursor, VS Code, Claude Code, and similar tools. Optional AI uses your own keys.
             </p>
           </div>
 

@@ -20,7 +20,7 @@ const syne = Syne({
 });
 
 const siteDescription =
-  "Plan architecture, scan local codebases, and export agent handoffs. Local-first, MIT open source.";
+  "Local studio to plan new products or scan existing repos. Agent handoffs and codebase quality reports, on your machine.";
 
 export const metadata: Metadata = {
   title: `${BRAND_NAME} · Build on solid ground`,

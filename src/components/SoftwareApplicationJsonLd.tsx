@@ -14,7 +14,7 @@ export function SoftwareApplicationJsonLd() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS, Windows, Linux, Web",
     description:
-      "Local app to plan products, scan codebases, and export AI agent handoff packages.",
+      "Local studio to plan new products or scan existing repos. Agent handoffs and codebase quality reports, on your machine.",
     url: SITE_URL,
     downloadUrl: GITHUB_RELEASES_URL,
     softwareHelp: GITHUB_GET_STARTED_URL,
