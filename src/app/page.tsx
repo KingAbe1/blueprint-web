@@ -13,6 +13,7 @@ import {
   GITHUB_REPO_URL,
   HERO_SCREENSHOT_PATH,
 } from "@/constants/site";
+import { FAQ_ITEMS } from "@/constants/faq";
 import { SupportedFrameworkProfilesSection } from "@/components/SupportedFrameworkProfilesSection";
 import { supportedDeepProfilesSummary } from "@/constants/supportedAnalysisProfiles";
 
@@ -32,9 +33,9 @@ export default function Home() {
                 <span>{BRAND_NAME}</span>
               </p>
               <h1>
-                Move fast.
+                Plan new products.
                 <br />
-                <span>Stay grounded.</span>
+                <span>Scan existing repos.</span>
               </h1>
               <p className="hero-description">
                 Local studio to plan new products or scan existing repos. Agent handoffs and codebase quality reports, on your machine.
@@ -142,13 +143,39 @@ export default function Home() {
         <div className="faq-section section-wrap">
           <div className="faq-intro"><span className="section-eyebrow">FAQ</span><h2>Good to know before you begin.</h2><p>{BRAND_NAME} works alongside the tools you already use.</p></div>
           <div className="faq-list">
-            <details className="faq-item"><summary>Does {BRAND_NAME} write my application code?<span aria-hidden="true" /></summary><p>No. It helps you plan, scan, and export handoff context. Your coding agent or IDE implements the application.</p></details>
-            <details className="faq-item"><summary>Can I use it with an existing project?<span aria-hidden="true" /></summary><p>Yes. Scan a local codebase for structure, architecture signals, and quality checks. Deeper analysis applies when the repo matches a supported deep profile ({supportedDeepProfilesSummary()} today). See <a href="#supported-profiles">supported profiles</a> for the full list.</p></details>
-            <details className="faq-item"><summary>Is it open source?<span aria-hidden="true" /></summary><p>Yes, MIT on <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">GitHub</a>. Forks are welcome; please rebrand if you ship your own product.</p></details>
-            <details className="faq-item"><summary>Is my data sent to your servers?<span aria-hidden="true" /></summary><p>No. Specs and scan results stay on your machine. If you turn on AI, requests go directly to the provider you configure.</p></details>
-            <details className="faq-item"><summary>Do I need AI to use it?<span aria-hidden="true" /></summary><p>Much of the app works without AI. Greenfield build questions need a configured provider; scans and handoff preview do not.</p></details>
-            <details className="faq-item"><summary>Browser or desktop app?<span aria-hidden="true" /></summary><p>Both. The browser build is fine for planning. Use the desktop app for folder pickers and writing handoffs into a repo.</p></details>
-            <details className="faq-item" id="faq-macos"><summary>macOS says the app is damaged. What do I do?<span aria-hidden="true" /></summary><p>Installers are not Apple-notarized yet. After you move the app to Applications, run <code>xattr -cr &quot;/Applications/blueprint studio.app&quot;</code> in Terminal, then open again (or right-click → Open). That clears the download quarantine flag — the app is not actually damaged.</p></details>
+            {FAQ_ITEMS.map((item) => (
+              <details key={item.question} className="faq-item" id={item.id}>
+                <summary>
+                  {item.question}
+                  <span aria-hidden="true" />
+                </summary>
+                <p>
+                  {item.question === "Can I use it with an existing project?" ? (
+                    <>
+                      Yes. Scan a local codebase for structure, architecture signals, and quality checks. Deeper analysis
+                      applies when the repo matches a supported deep profile ({supportedDeepProfilesSummary()} today). See{" "}
+                      <a href="#supported-profiles">supported profiles</a> for the full list.
+                    </>
+                  ) : item.question === "Is it open source?" ? (
+                    <>
+                      Yes, MIT on{" "}
+                      <a href={GITHUB_REPO_URL} target="_blank" rel="noreferrer">
+                        GitHub
+                      </a>
+                      . Forks are welcome; please rebrand if you ship your own product.
+                    </>
+                  ) : item.id === "faq-macos" ? (
+                    <>
+                      Installers are not Apple-notarized yet. After you move the app to Applications, run{" "}
+                      <code>xattr -cr &quot;/Applications/blueprint studio.app&quot;</code> in Terminal, then open again
+                      (or right-click → Open). That clears the download quarantine flag — the app is not actually damaged.
+                    </>
+                  ) : (
+                    item.answerText
+                  )}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
         <Suspense fallback={<DownloadSectionFallback />}>

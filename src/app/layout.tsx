@@ -2,9 +2,18 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, Syne } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { FaviconSync } from "@/components/FaviconSync";
+import { FaqJsonLd } from "@/components/FaqJsonLd";
 import { SoftwareApplicationJsonLd } from "@/components/SoftwareApplicationJsonLd";
 import { ThemeInitScript } from "./theme-init";
-import { BRAND_ICON_PATH, BRAND_NAME, HERO_SCREENSHOT_PATH, SITE_URL } from "@/constants/site";
+import {
+  BRAND_ICON_PATH,
+  BRAND_NAME,
+  OG_IMAGE_ALT,
+  OG_IMAGE_URL,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/constants/site";
 import "./globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -19,32 +28,29 @@ const syne = Syne({
   weight: ["500", "600", "700", "800"],
 });
 
-const siteDescription =
-  "Local studio to plan new products or scan existing repos. Agent handoffs and codebase quality reports, on your machine.";
-
 export const metadata: Metadata = {
-  title: `${BRAND_NAME} · Build on solid ground`,
-  description: siteDescription,
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   openGraph: {
     type: "website",
-    title: `${BRAND_NAME} · Build on solid ground`,
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: BRAND_NAME,
     images: [
       {
-        url: HERO_SCREENSHOT_PATH,
+        url: OG_IMAGE_URL,
         width: 3024,
         height: 1964,
-        alt: `${BRAND_NAME} app screenshot`,
+        alt: OG_IMAGE_ALT,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${BRAND_NAME} · Build on solid ground`,
-    description: siteDescription,
-    images: [HERO_SCREENSHOT_PATH],
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE_URL],
   },
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
@@ -63,6 +69,7 @@ export default function RootLayout({
     <html lang="en" className={`${ibmPlexSans.variable} ${syne.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <SoftwareApplicationJsonLd />
+        <FaqJsonLd />
         <ThemeInitScript />
         <FaviconSync />
         <a className="skip-link" href="#main-content">
