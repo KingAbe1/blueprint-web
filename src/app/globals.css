@@ -688,6 +688,54 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
 .footer-wordmark { color: #243247; font-size: 14px; }
 .footer-wordmark .wordmark-mark { width: 20px; height: 20px; flex-basis: 20px; }
 
+.not-found-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 48px 0 64px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(47, 94, 240, 0.12), transparent 55%),
+    var(--paper);
+}
+.not-found-panel {
+  width: 100%;
+  max-width: 640px;
+  text-align: left;
+}
+.not-found-brand { margin: 0 0 28px; }
+.not-found-panel .section-eyebrow { margin: 0 0 12px; }
+.not-found-panel h1 {
+  margin: 0;
+  color: #152033;
+  font-size: clamp(36px, 6vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -.045em;
+  font-weight: 700;
+}
+.not-found-copy {
+  max-width: 44ch;
+  margin: 16px 0 0;
+  color: #5c6b82;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.not-found-actions {
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.not-found-hint {
+  margin: 28px 0 0;
+  color: #7a879c;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.not-found-hint a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 @media (max-width: 1050px) {
   .hero-section { grid-template-columns: minmax(300px, .8fr) minmax(440px, 1.2fr); padding-left: 36px; padding-right: 36px; gap: 24px; }
   .main-nav { gap: 22px; margin-left: 25px; }
@@ -825,6 +873,19 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
   .faq-list { margin-top: 25px; }
   .closing-section { margin: 38px 16px 48px; padding: 52px 22px 55px; border-radius: 23px; }
   .closing-section h2 { font-size: 32px; }
+  .not-found-page { padding: 32px 0 48px; }
+  .not-found-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .not-found-actions .button-primary,
+  .not-found-actions .text-link {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .not-found-actions .text-link { min-height: 44px; }
   .site-footer { padding: 18px 22px; min-height: 0; flex-wrap: wrap; gap: 12px 18px; }
   .site-footer > span:nth-child(2) { order: 3; width: 100%; }
 }
@@ -1078,3 +1139,12 @@ html[data-theme="dark"] .site-footer .footer-meta a:hover { color: #bfdbfe; }
 html[data-theme="dark"] ::selection { background: #3b82f6; color: #0c0d0f; }
 html[data-theme="dark"] .button-primary { background: #3b82f6; box-shadow: 0 7px 16px rgba(59, 130, 246, 0.25); }
 html[data-theme="dark"] .button-primary:hover { background: #2563eb; box-shadow: 0 10px 20px rgba(59, 130, 246, 0.32); }
+html[data-theme="dark"] .not-found-page {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(59, 130, 246, 0.14), transparent 55%),
+    var(--surface-canvas);
+}
+html[data-theme="dark"] .not-found-panel h1 { color: var(--text-primary); }
+html[data-theme="dark"] .not-found-copy { color: var(--text-muted); }
+html[data-theme="dark"] .not-found-hint { color: var(--text-muted); }
+html[data-theme="dark"] .not-found-hint a { color: #93c5fd; }

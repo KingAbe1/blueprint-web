@@ -60,8 +60,12 @@ export const metadata: Metadata = {
     google: "rN4aLc9n7pHoeUQHVh6V3uJNZr2roNaYb45Y41Qs-Y4",
   },
   icons: {
-    icon: BRAND_ICON_PATH,
-    apple: BRAND_ICON_PATH,
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: BRAND_ICON_PATH, type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
