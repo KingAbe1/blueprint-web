@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { brandAppIconSrc, brandLogoMarkSrc } from "@/lib/brandAssets";
+import { BRAND_NAME } from "@/constants/site";
 import { useSiteTheme } from "@/hooks/useSiteTheme";
 
 type BrandMarkProps = {
@@ -26,7 +27,7 @@ export function BrandMark({
     <Image
       className={className}
       src={src}
-      alt=""
+      alt={`${BRAND_NAME} logo`}
       width={width}
       height={height}
       priority={priority}

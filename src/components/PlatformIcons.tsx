@@ -31,10 +31,9 @@ export function LinuxIcon({ className = "download-platform-icon" }: PlatformIcon
     <Image
       className={className}
       src="/platforms/linux.svg"
-      alt=""
+      alt="Linux"
       width={28}
       height={32}
-      aria-hidden="true"
     />
   );
 }
