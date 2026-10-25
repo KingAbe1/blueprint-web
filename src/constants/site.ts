@@ -7,7 +7,9 @@ export const GITHUB_LICENSE_URL = `${GITHUB_REPO_URL}/blob/main/LICENSE`;
 export const GITHUB_SECURITY_URL = `${GITHUB_REPO_URL}/blob/main/SECURITY.md`;
 export const GITHUB_RELEASES_URL = `${GITHUB_REPO_URL}/releases`;
 export const GITHUB_CHANGELOG_URL = GITHUB_RELEASES_URL;
-export const HERO_SCREENSHOT_PATH = "/hero-screenshot.png";
+/** Optimized for LCP (~1440w WebP). Full PNG kept at `/hero-screenshot.png` as source archive. */
+export const HERO_SCREENSHOT_PATH = "/hero-screenshot.webp";
+export const OG_IMAGE_PATH = "/og-image.jpg";
 export { BRAND_ICON_PATH } from "@/lib/brandAssets";
 
 /** Prefer `NEXT_PUBLIC_SITE_URL` (custom domain) when set; keep a trailing slash. */
@@ -15,8 +17,7 @@ const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://blueprint-web-ch
 export const SITE_URL = rawSiteUrl.endsWith("/") ? rawSiteUrl : `${rawSiteUrl}/`;
 export const SITE_ORIGIN = SITE_URL.slice(0, -1);
 
-/** Absolute share image (OG/Twitter). Uses the hero screenshot until a dedicated 1200×630 asset exists. */
-export const OG_IMAGE_URL = `${SITE_ORIGIN}${HERO_SCREENSHOT_PATH}`;
+export const OG_IMAGE_URL = `${SITE_ORIGIN}${OG_IMAGE_PATH}`;
 export const OG_IMAGE_ALT = `${BRAND_NAME}: local studio to plan products, scan repos, and export agent handoffs`;
 
 export const SITE_DESCRIPTION =

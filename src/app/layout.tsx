@@ -19,13 +19,15 @@ import "./globals.css";
 const ibmPlexSans = IBM_Plex_Sans({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
+  display: "swap",
 });
 
 const syne = Syne({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -40,8 +42,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_URL,
-        width: 3024,
-        height: 1964,
+        width: 1200,
+        height: 630,
         alt: OG_IMAGE_ALT,
       },
     ],
@@ -54,6 +56,9 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
+  verification: {
+    google: "rN4aLc9n7pHoeUQHVh6V3uJNZr2roNaYb45Y41Qs-Y4",
+  },
   icons: {
     icon: BRAND_ICON_PATH,
     apple: BRAND_ICON_PATH,

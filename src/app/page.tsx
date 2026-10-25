@@ -29,7 +29,7 @@ export default function Home() {
           <div className="hero-section">
             <div className="hero-copy">
               <p className="hero-brand">
-                <BrandMark variant="mark" width={20} height={20} priority className="hero-brand-mark" />
+                <BrandMark variant="mark" width={20} height={20} className="hero-brand-mark" />
                 <span>{BRAND_NAME}</span>
               </p>
               <h1>
@@ -57,10 +57,12 @@ export default function Home() {
                   className="hero-screenshot"
                   src={HERO_SCREENSHOT_PATH}
                   alt={`${BRAND_NAME} app screenshot`}
-                  width={3024}
-                  height={1964}
+                  width={1440}
+                  height={935}
                   priority
-                  sizes="(max-width: 768px) 100vw, min(720px, 58vw)"
+                  fetchPriority="high"
+                  quality={80}
+                  sizes="(max-width: 768px) 92vw, min(720px, 50vw)"
                 />
               </TiltSurface>
             </div>
